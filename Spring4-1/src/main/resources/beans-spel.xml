@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean class="com.wangchuncheng.spring.spel.Person"
+          name="person"
+          p:name="Jesse"
+          p:age="21"
+          p:level="#{car.price > 300000 ? '金领':'白领'}"
+          p:car="#{car}"/>
+    <!--这里使用SpEL的if-else运算符，引用其他对象的方式-->
+
+    <bean class="com.wangchuncheng.spring.beans.Car" name="car">
+        <constructor-arg index="0" value="#{'Audi'}"/>
+        <constructor-arg index="1" value="#{'Shangqi'}"/>
+        <constructor-arg index="2" value="#{5e5}"/>
+        <constructor-arg index="3" value="#{240}"/>
+    </bean>
+</beans>

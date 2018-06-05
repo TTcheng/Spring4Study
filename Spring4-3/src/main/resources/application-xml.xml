@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <bean id="arithmeticCalculator" class="com.wangchuncheng.aop.basexml.ArithmeticCalculatorImpl"></bean>
+    <bean id="loggingAspect" class="com.wangchuncheng.aop.basexml.LoggingAspect"/>
+    <bean id="validationAspect" class="com.wangchuncheng.aop.basexml.ValidationAspect"/>
+    <!--配置AOP-->
+    <aop:config>
+        <!--配置切点-->
+        <aop:pointcut id="pointcut" expression="execution(public int com.wangchuncheng.aop.basexml.ArithmeticCalculator.*(..)))"/>
+        <!--配置切面-->
+        <aop:aspect ref="loggingAspect" order="2">
+            <!--配置通知-->
+            <aop:before method="beforeMethod" pointcut-ref="pointcut"/>
+            <aop:after method="afterMethod" pointcut-ref="pointcut"/>
+        </aop:aspect>
+        <aop:aspect ref="validationAspect" order="1">
+            <aop:before method="validateArgs" pointcut="execution(public int com.wangchuncheng.aop.basexml.ArithmeticCalculator.div(..)))"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

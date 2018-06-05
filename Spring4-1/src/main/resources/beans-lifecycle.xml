@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean class="com.wangchuncheng.spring.lifecycle.Car"
+          id="car"
+          init-method="onInit"
+          destroy-method="destroy">
+        <property name="brand" value="Audi"/>
+    </bean>
+    <!--配置bean的后置处理器-->
+    <bean class="com.wangchuncheng.spring.lifecycle.MyBeanPostProcessor"/>
+
+</beans>

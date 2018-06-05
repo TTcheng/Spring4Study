@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    <!--配置Spring配置文件的名称和位置-->
+    <context-param>
+        <param-name>configuration</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
+    <!--配置启动IOC容器的ServletContextListener-->
+    <listener>
+        <listener-class>com.cheng.spring.struts2.listeners.SpringServletContextListener</listener-class>
+    </listener>
+    <!--TestServlet-->
+    <servlet>
+        <description></description>
+        <display-name>TestServlet</display-name>
+        <servlet-name>TestServlet</servlet-name>
+        <servlet-class>com.cheng.spring.struts2.servlets.TestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TestServlet</servlet-name>
+        <url-pattern>/TestServlet</url-pattern>
+    </servlet-mapping>
+</web-app>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="address" class="com.wangchuncheng.spring.autowire.Address">
+        <property name="city" value="Beijing"/>
+        <property name="street" value="Wudaokou"/>
+    </bean>
+    <bean id="address2" class="com.wangchuncheng.spring.autowire.Address">
+        <property name="city" value="Chengdu"/>
+        <property name="street" value="Chunxilu"/>
+    </bean>
+    <bean class="com.wangchuncheng.spring.beans.Car" id="car">
+        <constructor-arg index="0" value="Audi"/>
+        <constructor-arg index="1" value="Shangqi"/>
+        <constructor-arg index="2" value="250000"/>
+        <constructor-arg index="3" value="240"/>
+    </bean>
+    <!--可以使用autowire属性自动装配，
+        byName根据bean名字和当前bean的setter风格属性名进行自动装配
+        byType根据bean类型和当前bean的属性的类型进行自动装配
+        -->
+    <bean class="com.wangchuncheng.spring.autowire.Person"
+          id="person"
+          p:name="Jesse"
+          autowire="byName">
+        <!--使用autowire，下述属性自动装配，无需手动配置-->
+          <!--p:car-ref="car"-->
+          <!--p:address-ref="address"-->
+    </bean>
+</beans>

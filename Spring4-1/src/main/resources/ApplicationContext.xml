@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    <!--配置bean-->
+    <!--IOC容器通过反射的方式使用class的全类名创建对象，id作为其标识-->
+    <bean id="helloWorld" class="com.wangchuncheng.spring.beans.HelloWorld">
+        <!--配置属性值,name value-->
+        <property name="name" value="Spring"></property>
+    </bean>
+    <!--通过构造方法配置bean属性,可以指定type,index来区分重载的构造器-->
+    <bean id="car" class="com.wangchuncheng.spring.beans.Car" >
+        <constructor-arg index="0" value="Audi"/>
+        <constructor-arg index="1" value="Shanghai"/>
+        <constructor-arg index="2" value="300000"/>
+        <constructor-arg index="3" value="250"/>
+    </bean>
+    <bean id="person" class="com.wangchuncheng.spring.beans.Person">
+        <property name="name" value="Jesse"/>
+        <property name="age" value="22"/>
+        <property name="car" ref="car"/>
+    </bean>
+
+    <bean id="car1" class="com.wangchuncheng.spring.beans.Car">
+        <constructor-arg index="0" value="Faraday"/>
+        <constructor-arg index="1" value="FF"/>
+        <constructor-arg index="2" value="1000000"/>
+        <constructor-arg index="3" value="280"/>
+    </bean>
+    <bean id="car2" class="com.wangchuncheng.spring.beans.Car">
+        <constructor-arg index="0" value="Tesla"/>
+        <constructor-arg index="1" value="Tesla"/>
+        <constructor-arg index="2" value="800000"/>
+        <constructor-arg index="3" value="260"/>
+    </bean>
+    <bean class="com.wangchuncheng.spring.beans.RichPerson" id="richPerson">
+        <property name="name" value="JackMa"/>
+        <property name="age" value="45"/>
+        <property name="cars">
+            <list>
+                <ref bean="car"/>
+                <ref bean="car1"/>
+                <ref bean="car2"/>
+            </list>
+        </property>
+    </bean>
+
+    <!--配置Properties属性值-->
+    <bean id="dataSource" class="com.wangchuncheng.spring.beans.DataSource">
+        <property name="properties">
+            <props>
+                <prop key="user">root</prop>
+                <prop key="pwd">1234</prop>
+                <prop key="jdbcUrl">jdbc:mysql://test</prop>
+                <prop key="driverClass">com.mysql.jdbc.Driver</prop>
+            </props>
+        </property>
+    </bean>
+    <!--单独List集合-->
+    <util:list id="cars">
+        <ref bean="car"/>
+        <ref bean="car1"/>
+        <ref bean="car2"/>
+    </util:list>
+    <bean id="richPerson2" class="com.wangchuncheng.spring.beans.RichPerson">
+        <property name="name" value="Liuqiangdong"/>
+        <property name="age" value="44"/>
+        <property name="cars" ref="cars"/>
+    </bean>
+    <!--通过p命名空间为bean属性赋值-->
+    <bean id="person1"
+          class="com.wangchuncheng.spring.beans.Person"
+          p:name="Jessie"
+          p:age="30"
+          p:car-ref="car">
+    </bean>
+</beans>
